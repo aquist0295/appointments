@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect, useCallback} from "react"
+import {BiCalendar } from "react-icons/bi"
+import Search from "./Components/Search"
+import Addappt from "./Components/Appointments"
+import ApptInfo from "./Components/AppointmentInfo"
 
 function App() {
+  let[appointmentList, setappointmentList] = useState ([]);
+
+  const fetchData = useCallback (() =>{
+    fetch("./AppointmentData.json")
+       .then( response => response.json())
+       .then(data => {
+         setappointmentList(data) 
+       });
+  }, [])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container mx-auto mt-3 font-thin">
+     <h1 className ="text-5xl mb-3">
+     <BiCalendar className ="inline-block text-red-400 align-top" /> Your Appointments</h1>
+     <Addappt />
+     <Search />
+
+    <ul className ="divide-y divide-gray-200">
+        {appointmentList
+          .map(appt =>(
+            <ApptInfo key = {appt.id}
+            appt = {appt}
+            />
+
+          ))
+        }
+    </ul>
+
     </div>
   );
 }
