@@ -31,6 +31,11 @@ function App() {
           .map(appt =>(
             <ApptInfo key = {appt.id}
             appt = {appt}
+            onDeleteAppt = {
+              appId =>
+              setappointmentList(appointmentList.filter(appointment => 
+                appointment.id != appId))
+            }
             />
 
           ))
