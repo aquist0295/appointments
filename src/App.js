@@ -6,6 +6,26 @@ import ApptInfo from "./Components/AppointmentInfo"
 
 function App() {
   let[appointmentList, setappointmentList] = useState ([]);
+  let[query, setQuery] = useState("");
+  let[sortBy, setsortBy] = useState("petName")
+  let[orderBy, setOrderBy] = useState("asc")
+
+  const filteredAppt  =  appointmentList.filter(
+    item => {
+      return (
+        item.petName.toLowerCase().includes(query.toLowerCase()) || 
+        item.ownerName.toLowerCase().includes(query.toLowerCase()) ||  
+        item.aptNotes.toLowerCase().includes(query.toLowerCase())  
+      )
+    }
+  ).sort((a,b) =>{
+      let order  = (orderBy === "asc") ? 1 : -1;
+
+      return(
+        a[sortBy].toLowerCase() < b[sortBy].toLowerCase() ?
+        -1 * order : 1 * order
+      )
+  })
 
   const fetchData = useCallback (() =>{
     fetch("./AppointmentData.json")
@@ -24,10 +44,17 @@ function App() {
      <h1 className ="text-5xl mb-3">
      <BiCalendar className ="inline-block text-red-400 align-top" /> Your Appointments</h1>
      <Addappt />
-     <Search />
+     <Search 
+      query = {query}
+      onQueryChange ={myQuery => setQuery(myQuery)}
+      orderBy = {orderBy}
+      onOrderByChange = {mySort => setOrderBy(mySort)}
+      sortBy = {sortBy}
+      onSortByChange = {mySort => setsortBy(mySort)} 
+     />
 
     <ul className ="divide-y divide-gray-200">
-        {appointmentList
+        {filteredAppt
           .map(appt =>(
             <ApptInfo key = {appt.id}
             appt = {appt}
