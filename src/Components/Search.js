@@ -11,19 +11,19 @@ const Dropdown  = ({toggle, sortBy, onSortByChange, orderBy, onOrderByChange}) =
       <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
         <div onClick = {() => onSortByChange("petName")}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-          role="menuitem">Pet Name  {(sortBy === "petName") && <BiCheck />}</div>
+          role="menuitem">Trade School / College {(sortBy === "petName") && <BiCheck />}</div>
         <div onClick = {() => onSortByChange("ownerName")}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-          role="menuitem">Owner Name   {(sortBy === "ownerName") && <BiCheck />}</div>
+          role="menuitem">College Loans  {(sortBy === "ownerName") && <BiCheck />}</div>
         <div onClick = {() => onSortByChange("aptDate")}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-          role="menuitem">Date   {(sortBy === "aptDate") && <BiCheck />}</div>
+          role="menuitem">Credit   {(sortBy === "aptDate") && <BiCheck />}</div>
         <div onClick = {() => onOrderByChange("asc")}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer border-gray-1 border-t-2"
-          role="menuitem">Asc   {(sortBy === "asc") && <BiCheck />}</div>
+          role="menuitem">Budgeting   {(sortBy === "asc") && <BiCheck />}</div>
         <div onClick = {() => onOrderByChange("desc")}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-          role="menuitem">Desc  {(sortBy === "desc") && <BiCheck />}</div>
+          role="menuitem">Other Resources  {(sortBy === "desc") && <BiCheck />}</div>
       </div>
     </div>
     )
@@ -45,7 +45,7 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderB
             <div>
               <button type="button" onClick = {() => {setToggleSort(!toggleSort)}}
                 className="justify-center px-4 py-2 bg-blue-400 border-2 border-blue-400 text-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                Sort By <BiCaretDown className="ml-2" />
+                please select options<BiCaretDown className="ml-2" />
               </button>
               <Dropdown toggle = {toggleSort}
                  orderBy = {orderBy}
